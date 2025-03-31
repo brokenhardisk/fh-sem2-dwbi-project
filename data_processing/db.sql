@@ -29,8 +29,7 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_bi
 
 create table if not exists m024.p_gender_dimension
 (
-    gender_id   integer default nextval('m024.p_gender_dimension_gender_id_seq1'::regclass) not null
-        primary key,
+    gender_id   integer primary key generated always as identity not null,
     gender_type varchar(10)                                                                 not null
         constraint unique_gender
             unique
@@ -45,8 +44,7 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_ge
 
 create table if not exists m024.p_station_dimension
 (
-    station_id   integer default nextval('m024.p_station_dimension_station_id_seq'::regclass) not null
-        primary key,
+    station_id   integer primary key generated always as identity not null,
     station_key  integer                                                                      not null,
     station_name varchar(255)                                                                 not null,
     latitude     double precision                                                             not null,
@@ -64,8 +62,7 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_st
 
 create table if not exists m024.p_time_dimension
 (
-    time_id integer default nextval('m024.p_time_dimension_time_id_seq1'::regclass) not null
-        primary key,
+    time_id integer primary key generated always as identity not null,
     time    timestamp                                                               not null
         constraint unique_time
             unique,
@@ -85,8 +82,7 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_ti
 
 create table if not exists m024.p_user_birthyear_dimension
 (
-    user_birthyear_id serial
-        primary key,
+    user_birthyear_id integer primary key generated always as identity not null,
     user_birthyear    integer
         constraint unique_user_birthyear
             unique
@@ -101,8 +97,7 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_us
 
 create table if not exists m024.p_user_type_dimension
 (
-    user_type_id integer default nextval('m024.p_user_type_dimension_user_type_id_seq1'::regclass) not null
-        primary key,
+    user_type_id integer primary key generated always as identity not null,
     user_type    varchar(50)                                                                       not null
         constraint unique_user_type
             unique
@@ -117,8 +112,7 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_us
 
 create table if not exists m024.p_trip_fact
 (
-    trip_id           integer default nextval('m024.p_trip_fact_trip_id_seq1'::regclass) not null
-        primary key,
+    trip_id           integer primary key generated always as identity not null,
     duration          integer                                                            not null,
     distance          double precision,
     start_time_id     integer                                                            not null
@@ -156,3 +150,4 @@ grant delete, insert, references, select, trigger, truncate, update on m024.p_tr
 
 grant delete, insert, references, select, trigger, truncate, update on m024.p_trip_fact to ds24m023;
 
+--update m024.citi_bike_data set processed = false
